@@ -4,7 +4,9 @@ class ArrayTasks {
     // Bemenet: number[] | null
     // Kimenet: number[]
     doublePositiveNumbers(arr) {
-        
+        if (!arr) return []
+        return arr.filter(n => n > 0).map(n => n * 2)
+
     }
 
     // 2. getSortedUniqueValues
@@ -12,7 +14,22 @@ class ArrayTasks {
     // Bemenet: number[] | null
     // Kimenet: number[]
     getSortedUniqueValues(arr) {
-        
+        if (!arr) return []
+        /*let uniques = []
+        for (let n of arr) {
+            if (!uniques.includes(n)){
+                uniques.push(n)
+            }
+        }
+        return uniques.sort((a, b) => a - b)*/
+
+        return arr.reduce(
+            (uniques, n) => {
+                if (!uniques.includes(n)){
+                uniques.push(n)
+            }
+            return uniques.sort(/*(a, b) => a - b*/)
+            }, [])
     }
 
     // 3. hasShortWord
@@ -20,7 +37,8 @@ class ArrayTasks {
     // Bemenet: string[] | null, number | null
     // Kimenet: boolean
     hasShortWord(arr, length = 3) {
-        
+        if (!arr || !length) return false
+        return arr.some(word => word?.length < length)
     }
 
     // 4. sumNumbersInMatrix
@@ -29,7 +47,10 @@ class ArrayTasks {
     // Bemenet: number[][] | null
     // Kimenet: number
     sumNumbersInMatrix(arr) {
-        
+        if (!arr) return []
+        return arr.map(row => {
+            row.filter(n => typeof n === 'number').reduce((sum, n) => sum + n, 0)
+        })
     }
 
 
@@ -39,7 +60,8 @@ class ArrayTasks {
     // Bemenet: number[] | null
     // Kimenet: boolean
     allNumbersPositive(arr) {
-        
+        if (!arr) return false
+        return arr.every(n => n > 0)
     }
 
     // 2. removeFirstAndLast
